@@ -45,6 +45,8 @@ class Reader():
                 if len(tokens) != len(pos):
                     print("invalid records, len(tokens) = {}, len(pos) = {}".format(len(tokens), len(pos)))
                     invalid_count += 1
+                    entities = next(f).strip()
+                    assert next(f).strip() == "" # seperating line
                     continue
 
                 assert len(tokens) == len(pos)
