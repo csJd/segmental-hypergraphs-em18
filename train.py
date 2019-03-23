@@ -115,8 +115,9 @@ for e_ in range(config.epoch):
         loss = ner_model.forward(token_batch_var, pos_batch_var, label_batch)
         loss.backward()
         clip_model_grad(ner_model, config.clip_norm)
-        print("batch {0} with {1} instance and sentece length {2} loss {3}".format(
-            batch_counter, batch_len, sent_len, loss.cpu().data.numpy()[0]))
+        if batch_counter % config.print_per_epoch == 0:
+            print("batch {0} with {1} instance and sentece length {2} loss {3}".format(
+                batch_counter, batch_len, sent_len, loss.cpu().data.numpy()[0]))
         batch_counter += 1
 
         optimizer.step()
@@ -151,6 +152,7 @@ print("")
 
 # remember to eval after loading the model. for the reason of batchnorm and dropout
 cur_time = time.time()
+print("Metric on test dataset of best model:")
 f1 = get_f1(best_model, "test")
 print("Test step took {} seconds".format(time.time() - cur_time))
 

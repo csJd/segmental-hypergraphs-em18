@@ -45,6 +45,7 @@ class Config():
         # for training
         self.embed_path = self.root_path + "/data/word_vec_{0}_{1}.pkl".format(self.data_set, self.token_embed)
         self.epoch = 500
+        self.print_per_epoch = 10
         self.if_gpu = True
         # self.if_gpu = False
         self.opt = "Adam"
