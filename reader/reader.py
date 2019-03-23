@@ -6,7 +6,7 @@ import string
 from tqdm import tqdm
 from collections import namedtuple, defaultdict, OrderedDict
 
-FILE_PATH = {"sample":"./data/genia_sample/"}
+FILE_PATH = {"sample": "./data/genia_sample/", "genia": "./data/genia_full/"}
 GLOVE_FILE = "./embeddings/glove.6B.100d.txt"
 
 SentInst = namedtuple("SentInst", "tokens chars pos entities")
@@ -20,6 +20,7 @@ class Reader():
         sent_list = []
         max_len = 0
         num_thresh = 0
+        invalid_count = 0
         with open(filename) as f:
             for line in f:
                 line = line.strip()
@@ -39,6 +40,12 @@ class Reader():
                     tokens = list(reversed(tokens))
                     pos = list(reversed(pos))
                     chars = list(reversed(chars))
+
+                # to skip the invalid case
+                if len(tokens) != len(pos):
+                    print("invalid records, len(tokens) = {}, len(pos) = {}".format(len(tokens), len(pos)))
+                    invalid_count += 1
+                    continue
 
                 assert len(tokens) == len(pos)
                 entities = next(f).strip()
@@ -73,6 +80,7 @@ class Reader():
                 assert next(f).strip() == "" # seperating line
 
                 sent_list.append(sentInst)
+        print("Invalid count: ", invalid_count)
         print("Max length: ", max_len)
         print("Threshold 6: ", num_thresh)
         return sent_list

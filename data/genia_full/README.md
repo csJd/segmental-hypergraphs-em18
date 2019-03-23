@@ -1,0 +1,1 @@
+Place full processed GENIA data (including train.data, dev.data and test.data) here, those data can get from [their gitlab repo](https://gitlab.com/sutd_nlp/overlapping_mentions/tree/master/data/GENIA/scripts).

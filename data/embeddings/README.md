@@ -1,0 +1,1 @@
+Place `glove.6B.100d.txt` in this folder.

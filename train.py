@@ -81,7 +81,10 @@ def get_f1(model, mode):
 
 
     print(pred_all, pred, recall_all, recall)
-    f1 = 2 / ((pred_all / pred) + (recall_all / recall)) 
+    p = pred / pred_all if pred_all else 0
+    r = recall / recall_all if recall_all else 0
+    f1 = 2 * p * r / (p + r) if p + r else 0
+    # f1 = 2 / ((pred_all / pred) + (recall_all / recall))
     print( "Precision {0}, Recall {1}, F1 {2}".format(pred / pred_all, recall / recall_all, f1) )
     # print("Prediction Crossing: ", pred_cross_num)
     # print("Gold Crossing: ", gold_cross_num)

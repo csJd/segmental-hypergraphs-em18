@@ -10,6 +10,7 @@ class Config():
         self.beta = 3
 
         # for data loader
+        # self.data_set = "genia"
         self.data_set = "sample"
         self.lowercase = True
         self.batch_size = 32
@@ -44,7 +45,8 @@ class Config():
         # for training
         self.embed_path = self.root_path + "/data/word_vec_{0}_{1}.pkl".format(self.data_set, self.token_embed)
         self.epoch = 500
-        self.if_gpu = False
+        self.if_gpu = True
+        # self.if_gpu = False
         self.opt = "Adam"
         self.lr = 0.005 # [0.3, 0.00006]
         self.l2 = 1e-4
