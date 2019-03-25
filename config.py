@@ -28,24 +28,28 @@ class Config():
         self.span_feat_size = None # for h model
         self.t_null_id = None
         self.s_null_id = None
-        self.h_hidden_size = 128
+        # self.h_hidden_size = 128
+        self.h_hidden_size = 256  # best for genia
 
         # embed size
         self.token_embed = 100
         self.if_pos = True
         self.pos_embed = 32
-        self.input_dropout = 0.5
+        # self.input_dropout = 0.5
+        self.input_dropout = 0.6  # best for genia
 
         # for lstm
-        self.f_hidden_size = 128  # 32, 64, 128, 256
+        # self.f_hidden_size = 128  # 32, 64, 128, 256
+        self.f_hidden_size = 256  # best for genia
         self.f_layers = 1
-        self.f_lstm_dropout = 0.1 # [0,0.5]
+        # self.f_lstm_dropout = 0.1 # [0,0.5]
+        self.f_lstm_dropout = 0.6  # best for genia
         self.semi_hidden_size = self.f_hidden_size
 
         # for training
         self.embed_path = self.root_path + "/data/word_vec_{0}_{1}.pkl".format(self.data_set, self.token_embed)
         self.epoch = 500
-        self.print_per_epoch = 10
+        self.print_per_epoch = 20
         self.if_gpu = True
         # self.if_gpu = False
         self.opt = "Adam"
